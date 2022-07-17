@@ -1,17 +1,22 @@
-import React from 'react'
+import React from "react"
 
-function Song() {
+function Song({ song, onSongClick, onDeleteSong }) {
+  const { id, artist, image } = song
 
-    return(
-        <div className="song" onClick={()=>console.log("Song clicked...")}>
-            <img src=""/>
-            <div className="song-info">
-                <h3>SONG</h3>
-                <h4>ARTIST</h4>
-            </div>
-            <button onClick={()=> console.log("Delete clicked...")}>X</button>
-        </div>
-    );
+  function deleteClicked(e) {
+    e.stopPropagation()
+    onDeleteSong(song)
+  }
+  return (
+    <div className="song" onClick={() => onSongClick(song)}>
+      <img src={image} />
+      <div className="song-info">
+        <h3>{song.song}</h3>
+        <h4>{artist}</h4>
+      </div>
+      <button onClick={deleteClicked}>X</button>
+    </div>
+  )
 }
 
-export default Song;
+export default Song
